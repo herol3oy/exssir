@@ -9,7 +9,7 @@ export default function Home () {
     <>
       <Nav />
       <Container>
-        <Row className='align-items-lg-center'>
+        <Row className='align-items-start align-items-lg-center h-100'>
           <Gallery />
           <CreateUrlForm />
         </Row>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { nanoid } from 'nanoid'
 import { db, serverTimestamp } from '../containers/Firebase'
 import Form from 'react-bootstrap/Form'
@@ -11,7 +12,7 @@ export default function CreateUrlForm () {
 
   const [input, setInput] = useState('')
   const [shortId, setShortId] = useState('')
-  const [urlCreated, setUrlCreated] = useState(false)
+  const [urlCreated, setUrlCreated] = useState(true)
 
   const ref = db.collection('urls')
 
@@ -34,9 +35,9 @@ export default function CreateUrlForm () {
   }
 
   return (
-    <Col lg={4}>
+    <Col lg={4} sm={12}>
       <Form onSubmit={createUrl}>
-        <InputGroup className='mb-3'>
+        <InputGroup size='lg' className='mb-3'>
           <FormControl
             placeholder='لینک خود را وارد کنید'
             aria-label='لینک خود را وارد کنید'
@@ -50,6 +51,17 @@ export default function CreateUrlForm () {
           </InputGroup.Append>
         </InputGroup>
       </Form>
+      <section className='d-flex align-items-center'>
+        <small className='mr-auto'>https://youtube...</small>
+        <a href='https://exss.ir/7Sj2_' >
+          <small>
+            https://exss.ir/7Sj2_
+          </small>
+        </a>
+        <CopyToClipboard text={`https://exss.ir/${shortId}`}>
+          <Button className='ml-1' variant='primary' size="sm">کپی</Button>
+        </CopyToClipboard>
+      </section>
       {shortId}
       {urlCreated}
     </Col>

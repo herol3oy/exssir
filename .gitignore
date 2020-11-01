@@ -1,5 +1,8 @@
 # firebase
-.firebase
+.firebase/
+**/firestore-debug.log
+**/firebase-debug.log
+**/ui-debug.log
 
 # dependencies
 /node_modules
