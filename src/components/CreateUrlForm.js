@@ -16,7 +16,7 @@ export default function CreateUrlForm () {
             aria-describedby='لینک'
           />
           <InputGroup.Append>
-            <Button variant='outline-success'>اکسیر‌کن</Button>
+            <Button variant='success' className='font-weight-bold'>کوتاه‌کن</Button>
           </InputGroup.Append>
         </InputGroup>
       </Form>
