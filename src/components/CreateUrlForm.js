@@ -41,44 +41,50 @@ export default function CreateUrlForm () {
   const shortenUrlResults = urlsArr
     .slice(0, 3)
     .map(item => (
-      <Alert
-        key={nanoid(8)}
-        variant='success'
-        className='d-flex align-items-center'
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
+        key={nanoid(3)}
       >
-        <small
-          className='mr-auto text-dark'
-        >
-          {`${item.input.slice(0, 17)}..`}
-        </small>
-        <a
-          href={`exss.ir/${item.shortId}`}
-          target='_blank'
-          rel='noopener noreferrer'
+        <Alert
+          variant='success'
+          className='d-flex align-items-center'
         >
           <small
-            className='font-weight-bold'
+            className='mr-auto text-dark'
           >
-            {`exss.ir/${item.shortId}`}
+            {`${item.input.slice(0, 17)}..`}
           </small>
-        </a>
-        <CopyToClipboard
-          text={`exss.ir/${item.shortId}`}
-        >
-          <OverlayTrigger
-            placement='right'
-            overlay={<Tooltip id='tooltip-disabled' style={{ fontFamily: 'Vazir, sans-serif', fontWeight: 700 }}>کپی‌</Tooltip>}
+          <a
+            href={`exss.ir/${item.shortId}`}
+            target='_blank'
+            rel='noopener noreferrer'
           >
-            <Button
-              className='ml-2 font-weight-bold'
-              variant='primary'
-              size='sm'
+            <small
+              className='font-weight-bold'
             >
-              <FaRegCopy />
-            </Button>
-          </OverlayTrigger>
-        </CopyToClipboard>
-      </Alert>
+              {`exss.ir/${item.shortId}`}
+            </small>
+          </a>
+          <CopyToClipboard
+            text={`exss.ir/${item.shortId}`}
+          >
+            <OverlayTrigger
+              placement='right'
+              overlay={<Tooltip id='tooltip-disabled' style={{ fontFamily: 'Vazir, sans-serif', fontWeight: 700 }}>کپی‌</Tooltip>}
+            >
+              <Button
+                className='ml-2 font-weight-bold'
+                variant='primary'
+                size='sm'
+              >
+                <FaRegCopy />
+              </Button>
+            </OverlayTrigger>
+          </CopyToClipboard>
+        </Alert>
+      </motion.div>
     ))
 
   return (
@@ -110,13 +116,7 @@ export default function CreateUrlForm () {
           </InputGroup.Append>
         </InputGroup>
       </Form>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-      >
-        {urlCreated ? shortenUrlResults : null}
-      </motion.div>
+      {urlCreated ? shortenUrlResults : null}
     </Col>
   )
 }
