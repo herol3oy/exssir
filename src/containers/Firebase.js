@@ -16,6 +16,6 @@ export const { serverTimestamp } = firebase.firestore.FieldValue
 export const increment = firebase.firestore.FieldValue.increment(1)
 export const db = firebase.firestore()
 
-if (window.location.hostname === "localhost") {
-  db.useEmulator("localhost", 8080);
+if (window.location.hostname === 'localhost') {
+  db.useEmulator('localhost', 8080)
 }

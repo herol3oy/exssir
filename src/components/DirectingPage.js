@@ -14,7 +14,7 @@ export default function DirectingPage ({ match }) {
         querySnapshot.forEach((doc) => {
           const urlRef = db.collection('urls').doc(doc.id)
           urlRef.update({ visits: increment })
-          window.location = doc.data().url
+          window.location = doc.data().longURL
         })
       })
       .catch(error => console.log('Error getting documents: ', error))
