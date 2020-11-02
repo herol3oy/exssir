@@ -14,8 +14,8 @@ export default function AboutModal (props) {
           درباره اکسیر
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <p className='text-right' dir='rtl'>
+      <Modal.Body className='text-right'>
+        <p dir='rtl'>
           اپلیکیشن
           {' '}
           <span className='font-weight-bold text-success'>اکسیر</span>
@@ -25,10 +25,10 @@ export default function AboutModal (props) {
           <span className='font-weight-bold text-success'>هنر</span>
           {' '}
           ترکیب شده است.
-          استفاده از این سرویس کاملا رایگان، این امکان را به هنرمندان می‌دهد
-          که کارهای نفیس آنها در فضای مجازی فرصت بیشتری برای ارایه داشته باشند.
-
+          {/* استفاده از این سرویس کاملا رایگان، این امکان را به هنرمندان می‌دهد */}
+          {/* که کارهای نفیس آنها در فضای مجازی فرصت بیشتری برای ارایه داشته باشند. */}
         </p>
+        <h3>روش استفاده</h3>
       </Modal.Body>
       <Modal.Footer>
         <Button className='font-weight-bold' onClick={props.onHide}>خروج</Button>

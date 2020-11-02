@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button'
 
 export default function Gallery () {
   return (
-    <Col lg={8} sm={12} className='d-lg-block d-xl-block d-md-block d-none'>
+    <Col lg={8} sm={12} className='order-lg-0 order-md-2 d-lg-block d-xl-block d-md-block d-none'>
       {/* <section className='text-center '>
         <h3 className='text-success font-weight-bold'>اکسیر هنر</h3>
         <p>

@@ -61,24 +61,22 @@ export default function CreateUrlForm () {
               {`exss.ir/${item.shortId}`}
             </h6>
           </a>
-          <CopyToClipboard
-            text={`exss.ir/${item.shortId}`}
+          <OverlayTrigger
+            placement='right'
+            overlay={<Tooltip id='tooltip-disabled' style={{ fontFamily: 'Vazir, sans-serif', fontWeight: 700 }}>کپی‌</Tooltip>}
           >
-            <OverlayTrigger
-              placement='right'
-              overlay={<Tooltip id='tooltip-disabled' style={{ fontFamily: 'Vazir, sans-serif', fontWeight: 700 }}>کپی‌</Tooltip>}
-            >
+            <CopyToClipboard text={`exss.ir/${item.shortId}`}>
               <Button className='ml-2 font-weight-bold' variant='primary' size='sm'>
                 <FaRegCopy />
               </Button>
-            </OverlayTrigger>
-          </CopyToClipboard>
+            </CopyToClipboard>
+          </OverlayTrigger>
         </Alert>
       </motion.div>
     ))
 
   return (
-    <Col lg={4} sm={12} className='align-self-start'>
+    <Col lg={4} sm={12}>
       <section className='mb-3'>
         <h1 className='site-title display-4 text-success text-center'>اکسیر</h1>
         <h6 className='text-center text-secondary'>
