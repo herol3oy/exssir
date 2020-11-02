@@ -81,7 +81,12 @@ export default function CreateUrlForm () {
       lg={4}
       sm={12}
     >
-      <h1 className='site-title display-4 text-success text-right p-3 rounded'>اکسیر</h1>
+      <section className='alert alert-info rounded mb-3'>
+        <h1 className='site-title display-4 text-success text-center pt-2'>اکسیر</h1>
+        <h6 className='text-center text-secondary'>
+          سرویس کوتاه‌کننده لینک و گالری‌ آنلاین هنری
+        </h6>
+      </section>
       <Form onSubmit={createUrl}>
         <InputGroup size='lg' className='mb-3'>
           <FormControl
