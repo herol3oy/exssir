@@ -45,21 +45,21 @@ export default function CreateUrlForm () {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
+        transition={{ delay: 0.5 }}
         key={nanoid(3)}
       >
         <Alert variant='success' className='d-flex align-items-center'>
           <small className='mr-auto text-dark'>
-            {`${item.input.slice(0, 17)}..`}
+            {`${item.input.slice(0, 20)}..`}
           </small>
           <a
             href={`https://exss.ir/${item.shortId}`}
             target='_blank'
             rel='noopener noreferrer'
           >
-            <small className='font-weight-bold'>
+            <h6 className='font-weight-bold text-success m-0'>
               {`exss.ir/${item.shortId}`}
-            </small>
+            </h6>
           </a>
           <CopyToClipboard
             text={`exss.ir/${item.shortId}`}
@@ -78,19 +78,16 @@ export default function CreateUrlForm () {
     ))
 
   return (
-    <Col
-      lg={4}
-      sm={12}
-    >
-      <section className='alert alert-success rounded mb-3'>
-        <h1 className='site-title display-4 text-success text-center pt-2'>اکسیر</h1>
+    <Col lg={4} sm={12} className='align-self-start'>
+      <section className='mb-3'>
+        <h1 className='site-title display-4 text-success text-center'>اکسیر</h1>
         <h6 className='text-center text-secondary'>
           کوتاه‌کننده لینک
-          <FaLink className='mx-1' />
+          <FaLink className='mx-1 text-success' />
            گالری‌ آنلاین هنری
         </h6>
       </section>
-      <Form onSubmit={createUrl}>
+      <Form className='shadow-lg' onSubmit={createUrl}>
         <InputGroup size='lg' className='mb-3'>
           <FormControl
             placeholder='لینک خود را وارد کنید'

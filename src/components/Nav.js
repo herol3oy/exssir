@@ -11,7 +11,7 @@ export default function Nav () {
 
   return (
     <>
-      <Navbar className='col-lg-12' bg='light'>
+      <Navbar className='shadow-sm' bg='light'>
         <ButtonGroup size='sm'>
           <Button variant='outline-success'>هنرمندان</Button>
           <Button variant='outline-success' onClick={() => setModalShow(true)}>درباره اکسیر</Button>
@@ -19,7 +19,7 @@ export default function Nav () {
         <Navbar.Toggle />
         <Navbar.Collapse className='justify-content-end'>
           <Navbar.Brand>
-            <Link to='/' className='shake shake-opacity display-4 rounded-circle text-decoration-none'>
+            <Link to='/' className='shake shake-opacity h1 rounded-circle text-decoration-none'>
               <span role='img' aria-label='اکسیر'>🧪</span>
             </Link>
           </Navbar.Brand>
