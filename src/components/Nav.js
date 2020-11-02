@@ -10,7 +10,7 @@ export default function Nav () {
 
   return (
     <>
-      <Navbar bg='light'>
+      <Navbar className='col-lg-12' bg='light'>
         <ButtonGroup size='sm'>
           <Button variant='success'>استخدام</Button>
           <Button variant='success'>درباره</Button>

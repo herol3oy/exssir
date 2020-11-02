@@ -47,23 +47,16 @@ export default function CreateUrlForm () {
         transition={{ delay: 1 }}
         key={nanoid(3)}
       >
-        <Alert
-          variant='success'
-          className='d-flex align-items-center'
-        >
-          <small
-            className='mr-auto text-dark'
-          >
+        <Alert variant='success' className='d-flex align-items-center'>
+          <small className='mr-auto text-dark'>
             {`${item.input.slice(0, 17)}..`}
           </small>
           <a
-            href={`exss.ir/${item.shortId}`}
+            href={`https://exss.ir/${item.shortId}`}
             target='_blank'
             rel='noopener noreferrer'
           >
-            <small
-              className='font-weight-bold'
-            >
+            <small className='font-weight-bold'>
               {`exss.ir/${item.shortId}`}
             </small>
           </a>
@@ -74,11 +67,7 @@ export default function CreateUrlForm () {
               placement='right'
               overlay={<Tooltip id='tooltip-disabled' style={{ fontFamily: 'Vazir, sans-serif', fontWeight: 700 }}>کپی‌</Tooltip>}
             >
-              <Button
-                className='ml-2 font-weight-bold'
-                variant='primary'
-                size='sm'
-              >
+              <Button className='ml-2 font-weight-bold' variant='primary' size='sm'>
                 <FaRegCopy />
               </Button>
             </OverlayTrigger>
@@ -92,11 +81,9 @@ export default function CreateUrlForm () {
       lg={4}
       sm={12}
     >
+      <h1 className='site-title display-4 text-success text-right p-3 rounded'>اکسیر</h1>
       <Form onSubmit={createUrl}>
-        <InputGroup
-          size='lg'
-          className='mb-3'
-        >
+        <InputGroup size='lg' className='mb-3'>
           <FormControl
             placeholder='لینک خود را وارد کنید'
             aria-label='لینک خود را وارد کنید'
@@ -106,11 +93,7 @@ export default function CreateUrlForm () {
             onChange={(e) => setLongURL(e.target.value)}
           />
           <InputGroup.Append>
-            <Button
-              variant='success'
-              type='submit'
-              className='font-weight-bold'
-            >
+            <Button variant='success' type='submit' className='font-weight-bold'>
               کوتاه‌کن
             </Button>
           </InputGroup.Append>

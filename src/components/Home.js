@@ -4,14 +4,16 @@ import Row from 'react-bootstrap/Row'
 import CreateUrlForm from './CreateUrlForm'
 import Gallery from './Gallery'
 
-export default function Home () {
+export default function Home() {
   return (
     <>
       <Nav />
       <Container>
-        <Row className='align-items-start align-items-lg-center h-100'>
-          <Gallery />
-          <CreateUrlForm />
+        <Row className='d-flex align-self-lg-stretch'>
+          <div className='d-flex flex-column flex-lg-row'>
+            <Gallery />
+            <CreateUrlForm />
+          </div>
         </Row>
       </Container>
     </>
