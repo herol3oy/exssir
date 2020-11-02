@@ -7,13 +7,13 @@ import Button from 'react-bootstrap/Button'
 export default function Gallery () {
   return (
     <Col lg={8} sm={12} className='order-lg-0 order-md-2 d-lg-block d-xl-block d-md-block d-none'>
-      {/* <section className='text-center '>
+      <section className='text-center '>
         <h3 className='text-success font-weight-bold'>اکسیر هنر</h3>
         <p>
           گویند روی سرخ تو سعدی چه زرد کرد
           اکسیر عشق بر مسم افتاد و زر شدم
         </p>
-      </section> */}
+      </section>
       <Image src='https://source.unsplash.com/1600x900/?art,minimal' fluid />
       <Alert className='d-flex justify-content-between text-right' dir='rtl' variant='success'>
         لطفا برای نمایش آثار خود با ما تماس بگیرید.

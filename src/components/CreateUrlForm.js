@@ -4,7 +4,6 @@ import { nanoid } from 'nanoid'
 import { db, serverTimestamp } from '../containers/Firebase'
 import { motion } from 'framer-motion'
 import { FaRegCopy, FaLink } from 'react-icons/fa'
-
 import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Button from 'react-bootstrap/Button'
@@ -33,15 +32,15 @@ export default function CreateUrlForm () {
           createdAt: serverTimestamp(),
           visits: 0
         })
-      setUrlArr((prevState) => [{ input: longURL, shortId }, ...prevState])
+      setUrlArr((prevState) => [{ longURL, shortId }, ...prevState])
       setUrlCreated(true)
       setLongURL('')
     }
   }
 
   const shortenUrlResults = urlsArr
-    .slice(0, 3)
-    .map(item => (
+    ?.slice(0, 3)
+    .map((url) => (
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -50,22 +49,18 @@ export default function CreateUrlForm () {
       >
         <Alert variant='success' className='d-flex align-items-center'>
           <small className='mr-auto text-dark'>
-            {`${item.input.slice(0, 20)}..`}
+            {`${url.longURL.slice(0, 20)}..`}
           </small>
-          <a
-            href={`https://exss.ir/${item.shortId}`}
-            target='_blank'
-            rel='noopener noreferrer'
-          >
+          <a href={`https://exss.ir/${url.shortId}`} target='_blank' rel='noopener noreferrer'>
             <h6 className='font-weight-bold text-success m-0'>
-              {`exss.ir/${item.shortId}`}
+              {`exss.ir/${url.shortId}`}
             </h6>
           </a>
           <OverlayTrigger
             placement='right'
             overlay={<Tooltip id='tooltip-disabled' style={{ fontFamily: 'Vazir, sans-serif', fontWeight: 700 }}>کپی‌</Tooltip>}
           >
-            <CopyToClipboard text={`exss.ir/${item.shortId}`}>
+            <CopyToClipboard text={`exss.ir/${url.shortId}`}>
               <Button className='ml-2 font-weight-bold' variant='primary' size='sm'>
                 <FaRegCopy />
               </Button>
