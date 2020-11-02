@@ -10,20 +10,28 @@ export default function AboutModal (props) {
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id='contained-modal-title-vcenter'>
-          Modal heading
+        <Modal.Title dir='rtl' className='font-weight-bold text-success text-right w-100' id='contained-modal-title-vcenter'>
+          درباره اکسیر
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Centered Modal</h4>
-        <p>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-          consectetur ac, vestibulum at eros.
+        <p className='text-right' dir='rtl'>
+          اپلیکیشن
+          {' '}
+          <span className='font-weight-bold text-success'>اکسیر</span>
+          {' '}
+          یک سرویس کوتاه کننده لینک است که با
+          {' '}
+          <span className='font-weight-bold text-success'>هنر</span>
+          {' '}
+          ترکیب شده است.
+          استفاده از این سرویس کاملا رایگان این امکان را به هنرمندان می‌دهد
+          که کارهای نفیس آنها در فضای مجازی فرصت بیشتری برای ارایه داشته باشند.
+
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button className='font-weight-bold' onClick={props.onHide}>خروج</Button>
       </Modal.Footer>
     </Modal>
   )

@@ -10,9 +10,9 @@ export default function Home () {
       <Nav />
       <Container>
         <Row
-          className='d-flex justify-content-center align-self-lg-stretch'
+          className='d-flex justify-content-center align-items-center'
         >
-          <div className='d-flex flex-lg-row flex-column'>
+          <div className='tri d-flex flex-lg-row flex-column'>
             <Gallery />
             <CreateUrlForm />
           </div>

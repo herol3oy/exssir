@@ -3,7 +3,8 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { nanoid } from 'nanoid'
 import { db, serverTimestamp } from '../containers/Firebase'
 import { motion } from 'framer-motion'
-import { FaRegCopy } from 'react-icons/fa'
+import { FaRegCopy, FaLink } from 'react-icons/fa'
+
 import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Button from 'react-bootstrap/Button'
@@ -81,10 +82,12 @@ export default function CreateUrlForm () {
       lg={4}
       sm={12}
     >
-      <section className='alert alert-info rounded mb-3'>
+      <section className='alert alert-success rounded mb-3'>
         <h1 className='site-title display-4 text-success text-center pt-2'>اکسیر</h1>
         <h6 className='text-center text-secondary'>
-          سرویس کوتاه‌کننده لینک و گالری‌ آنلاین هنری
+          کوتاه‌کننده لینک
+          <FaLink className='mx-1' />
+           گالری‌ آنلاین هنری
         </h6>
       </section>
       <Form onSubmit={createUrl}>
