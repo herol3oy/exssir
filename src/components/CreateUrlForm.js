@@ -11,10 +11,9 @@ import Col from 'react-bootstrap/Col'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Tooltip from 'react-bootstrap/Tooltip'
 import Badge from 'react-bootstrap/Badge'
-import Recaptcha from 'react-google-invisible-recaptcha';
+import Recaptcha from 'react-google-invisible-recaptcha'
 
 export default function CreateUrlForm () {
-
   const [longURL, setLongURL] = useState('')
   const [urlCreated, setUrlCreated] = useState(false)
   const [urlsArr, setUrlArr] = useState([])
@@ -23,11 +22,11 @@ export default function CreateUrlForm () {
   const recaptcha = useRef()
   const onResolved = () => {
     const data = {
-      reCaptchaToken: recaptcha.current.getResponse(),
+      reCaptchaToken: recaptcha.current.getResponse()
     }
     recaptcha.current.reset()
-    console.log("data", data)
-  };
+    console.log('data', data)
+  }
 
   const ref = db.collection('urls')
 
@@ -110,8 +109,8 @@ export default function CreateUrlForm () {
       </Form>
       <Recaptcha
         ref={recaptcha}
-        sitekey="6Ldrod4ZAAAAAI-DLI85XIkAbvuHHiZ0hSqy6jTo"
-        render="explicit"
+        sitekey='6Ldrod4ZAAAAAI-DLI85XIkAbvuHHiZ0hSqy6jTo'
+        render='explicit'
         onResolved={onResolved}
       />
       {!urlCreated ? (

@@ -7,8 +7,7 @@ import AboutModal from './AboutModal'
 import Contact from './ContactModal'
 import 'csshake/dist/csshake.min.css'
 
-export default function Nav() {
-
+export default function Nav () {
   const [aboutModalShow, setAboutModalShow] = useState(false)
   const [contactModalShow, setContactModalShow] = useState(false)
 
