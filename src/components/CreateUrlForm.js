@@ -12,6 +12,7 @@ import Col from 'react-bootstrap/Col'
 import Alert from 'react-bootstrap/Alert'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Tooltip from 'react-bootstrap/Tooltip'
+import Badge from 'react-bootstrap/Badge'
 
 export default function CreateUrlForm () {
   const [longURL, setLongURL] = useState('')
@@ -97,6 +98,15 @@ export default function CreateUrlForm () {
           </InputGroup.Append>
         </InputGroup>
       </Form>
+      {!urlCreated ? (
+        <div className='d-flex flex-wrap align-content-between justify-content-center'>
+          <Badge variant='secondary mr-1'>نامحدود</Badge>
+          <Badge variant='secondary mr-1'>همیشه پایدار</Badge>
+          <Badge variant='secondary mr-1'>پرسرعت</Badge>
+          <Badge variant='secondary mr-1'>بدون نیاز به ثبت‌نام</Badge>
+          <Badge variant='success mt-0 mt-lg-1 mt-md-1 mt-sm-1 mr-1'>میزبانی برروی سرورهای گوگل‌کلود</Badge>
+        </div>
+      ) : null}
       {urlCreated ? shortenUrlResults : null}
     </Col>
   )
