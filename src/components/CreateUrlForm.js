@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { nanoid } from 'nanoid'
 import { db, serverTimestamp } from '../containers/Firebase'
-// import { motion } from 'framer-motion'
 import { FaRegCopy, FaCheck } from 'react-icons/fa'
 import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
@@ -12,16 +11,28 @@ import Col from 'react-bootstrap/Col'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Tooltip from 'react-bootstrap/Tooltip'
 import Badge from 'react-bootstrap/Badge'
+import Recaptcha from 'react-google-invisible-recaptcha';
 
 export default function CreateUrlForm () {
+
   const [longURL, setLongURL] = useState('')
   const [urlCreated, setUrlCreated] = useState(false)
   const [urlsArr, setUrlArr] = useState([])
   const [copied, setCopied] = useState(false)
 
+  const recaptcha = useRef()
+  const onResolved = () => {
+    const data = {
+      reCaptchaToken: recaptcha.current.getResponse(),
+    }
+    recaptcha.current.reset()
+    console.log("data", data)
+  };
+
   const ref = db.collection('urls')
 
   const createUrl = (e) => {
+    recaptcha.current.execute()
     e.preventDefault()
     if (longURL !== '') {
       const shortId = nanoid(5)
@@ -97,6 +108,12 @@ export default function CreateUrlForm () {
           </InputGroup.Append>
         </InputGroup>
       </Form>
+      <Recaptcha
+        ref={recaptcha}
+        sitekey="6Ldrod4ZAAAAAI-DLI85XIkAbvuHHiZ0hSqy6jTo"
+        render="explicit"
+        onResolved={onResolved}
+      />
       {!urlCreated ? (
         <div className='d-flex flex-wrap justify-content-center'>
           <Badge variant='secondary mr-1'>همیشه پایدار</Badge>
