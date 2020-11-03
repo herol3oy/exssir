@@ -37,16 +37,16 @@ export default function Contact (props) {
               <Form.Group>
                 <Row>
                   <Col lg={6} sm={12}>
-                    <Form.Label>نام و نام‌خانوادگی</Form.Label>
-                    <Form.Control onChange={(e) => setFullName(e.target.value)} value={fullName} dir='rtl' type='text' name='name' placeholder='نام و نام‌خانوادگی' />
+                    <Form.Label>نام و نام‌خانوادگی*</Form.Label>
+                    <Form.Control onChange={(e) => setFullName(e.target.value)} value={fullName} dir='rtl' type='text' name='name' placeholder='نام و نام‌خانوادگی' required />
                   </Col>
                   <Col lg={6} sm={12}>
-                    <Form.Label>ایمیل</Form.Label>
-                    <Form.Control onChange={(e) => setEmail(e.target.value)} value={email} dir='rtl' type='email' name='email' placeholder='ایمیل' />
+                    <Form.Label>ایمیل*</Form.Label>
+                    <Form.Control onChange={(e) => setEmail(e.target.value)} value={email} dir='rtl' type='email' name='email' placeholder='ایمیل' required />
                   </Col>
                 </Row>
-                <Form.Label className='mt-2'>متن پیام</Form.Label>
-                <Form.Control onChange={(e) => setMsg(e.target.value)} value={msg} dir='rtl' as='textarea' name='message' rows={3} placeholder='متن پیام' />
+                <Form.Label className='mt-2'>متن پیام*</Form.Label>
+                <Form.Control onChange={(e) => setMsg(e.target.value)} value={msg} dir='rtl' as='textarea' name='message' rows={3} placeholder='متن پیام' required />
 
                 <Button type='submit' value='ارسال' className='font-weight-bold mt-3'>ارسال</Button>
               </Form.Group>
