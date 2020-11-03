@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { nanoid } from 'nanoid'
 import { db, serverTimestamp } from '../containers/Firebase'
-import { motion } from 'framer-motion'
-import { FaRegCopy, FaLink } from 'react-icons/fa'
+// import { motion } from 'framer-motion'
+import { FaRegCopy, FaCheck } from 'react-icons/fa'
 import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Button from 'react-bootstrap/Button'
@@ -17,6 +17,7 @@ export default function CreateUrlForm () {
   const [longURL, setLongURL] = useState('')
   const [urlCreated, setUrlCreated] = useState(false)
   const [urlsArr, setUrlArr] = useState([])
+  const [copied, setCopied] = useState(false)
 
   const ref = db.collection('urls')
 
@@ -38,38 +39,33 @@ export default function CreateUrlForm () {
     }
   }
 
+  const copyHandleClick = () => {
+    setCopied(true)
+    setTimeout(() => setCopied(false), 900)
+  }
+
   const shortenUrlResults = urlsArr
     ?.slice(0, 3)
     .map((url) => (
-      <div
-
-        key={nanoid(3)}
-      >
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className='alert alert-success d-flex align-items-center'
+      <div key={nanoid(3)} className='alert alert-success d-flex align-items-center'>
+        <small className='mr-auto text-dark'>
+          {`${url.longURL.slice(0, 20)}..`}
+        </small>
+        <a href={`https://exss.ir/${url.shortId}`} target='_blank' rel='noopener noreferrer'>
+          <h6 className='font-weight-bold text-success m-0'>
+            {`exss.ir/${url.shortId}`}
+          </h6>
+        </a>
+        <OverlayTrigger
+          placement='right'
+          overlay={<Tooltip id='tooltip-disabled' style={{ fontFamily: 'Vazir, sans-serif', fontWeight: 700 }}>کپی‌</Tooltip>}
         >
-          <small className='mr-auto text-dark'>
-            {`${url.longURL.slice(0, 20)}..`}
-          </small>
-          <a href={`https://exss.ir/${url.shortId}`} target='_blank' rel='noopener noreferrer'>
-            <h6 className='font-weight-bold text-success m-0'>
-              {`exss.ir/${url.shortId}`}
-            </h6>
-          </a>
-          <OverlayTrigger
-            placement='right'
-            overlay={<Tooltip id='tooltip-disabled' style={{ fontFamily: 'Vazir, sans-serif', fontWeight: 700 }}>کپی‌</Tooltip>}
-          >
-            <CopyToClipboard text={`exss.ir/${url.shortId}`}>
-              <Button className='ml-2 font-weight-bold' variant='primary' size='sm'>
-                <FaRegCopy />
-              </Button>
-            </CopyToClipboard>
-          </OverlayTrigger>
-        </motion.div>
+          <CopyToClipboard text={`exss.ir/${url.shortId}`}>
+            <Button onClick={copyHandleClick} className='ml-2 font-weight-bold' variant={`${copied ? 'success' : 'primary'}`} size='sm'>
+              {copied ? <FaCheck /> : <FaRegCopy />}
+            </Button>
+          </CopyToClipboard>
+        </OverlayTrigger>
       </div>
     ))
 
@@ -79,8 +75,7 @@ export default function CreateUrlForm () {
         <h1 className='site-title display-4 text-success text-center'>اکسیر</h1>
         <h6 dir='rtl' className='text-center text-secondary'>
           کوتاه‌کننده لینک
-          {/* <FaLink className='mx-1 text-success' /> */}
-          <span role='img' aria-label='لینک'>🔗</span> {` `}
+          <span role='img' aria-label='لینک'>🔗</span> {' '}
            گالری‌ آنلاین هنری
           <span role='img' aria-label='نقاش'>🎨</span>
         </h6>
@@ -103,13 +98,13 @@ export default function CreateUrlForm () {
         </InputGroup>
       </Form>
       {!urlCreated ? (
-        <div className='d-flex flex-wrap align-content-between justify-content-center'>
+        <div className='d-flex flex-wrap justify-content-center'>
           <Badge variant='secondary mr-1'>همیشه پایدار</Badge>
           <Badge variant='secondary mr-1'>پرسرعت</Badge>
           <Badge variant='secondary mr-1'>بدون نیاز به ثبت‌نام</Badge>
           <Badge variant='secondary mr-1'>لینک‌ دایمی</Badge>
           <Badge variant='secondary mr-1'>نامحدود</Badge>
-          <Badge variant='success '>میزبانی توسط گوگل‌کلود</Badge>
+          <Badge variant='success mt-1 mt-xl-0 mt-lg-0 mt-md-0 mt-sm-0'>میزبانی توسط گوگل‌کلود</Badge>
         </div>
       ) : null}
       {urlCreated ? shortenUrlResults : null}

@@ -28,7 +28,7 @@
 
 @media (min-width: 1281px) {
 	body {
-		@include body-background();
+		@include body-background;
 	}
 
 	.navbar {
@@ -43,6 +43,13 @@
 
 @media (min-width: 1025px) and (max-width: 1280px) {
 	/* CSS */
+	body {
+		@include body-background;
+	}
+
+	.navbar {
+		@include navbar;
+	}
 }
 
 /* 
@@ -91,7 +98,7 @@
 	body {
 		@include body-background;
 		@include mobile-hero-img;
-		background-position: center;
+		background-position: top;
 	}
 
 	.navbar {
