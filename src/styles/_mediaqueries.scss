@@ -1,3 +1,25 @@
+@mixin navbar {
+	background-color: transparent !important;
+}
+
+@mixin hero-img {
+	background-image: url('https://source.unsplash.com/1600x900/?art,design,minimal');
+}
+
+@mixin mobile-hero-img {
+	background-image: url('https://prod-cdn.wetransfer.net/packs/media/images/home-illustration-6ea2e70b.jpg');
+}
+
+@mixin body-background {
+	@include hero-img;
+	background-position: top;
+	background-repeat: no-repeat;
+	background-size: cover;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
 
 /* 
   ##Device = Desktops
@@ -5,9 +27,13 @@
 */
 
 @media (min-width: 1281px) {
-  
-	/* CSS */
-  
+	body {
+		@include body-background();
+	}
+
+	.navbar {
+		@include navbar;
+	}
 }
 
 /* 
@@ -16,9 +42,7 @@
 */
 
 @media (min-width: 1025px) and (max-width: 1280px) {
-  
 	/* CSS */
-  
 }
 
 /* 
@@ -27,9 +51,9 @@
 */
 
 @media (min-width: 768px) and (max-width: 1024px) {
-  
-	/* CSS */
-  
+	body {
+		@include body-background;
+	}
 }
 
 /* 
@@ -38,9 +62,7 @@
 */
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-  
 	/* CSS */
-  
 }
 
 /* 
@@ -49,21 +71,15 @@
 */
 
 @media (min-width: 481px) and (max-width: 767px) {
-  
 	/* CSS */
 	body {
-		background-image: url('https://prod-cdn.wetransfer.net/packs/media/images/home-illustration-6ea2e70b.jpg');
+		@include body-background;
+		@include mobile-hero-img;
 		background-position: center;
-		background-repeat: no-repeat;
-		background-size: cover;
-		left: 0;
-		position: absolute;
-		right: 0;
-		top: 0;
 	}
 
 	.navbar {
-		background-color: transparent !important;
+		@include navbar;
 	}
 }
 
@@ -72,19 +88,13 @@
   ##Screen = B/w 320px to 479px
 */
 @media (min-width: 320px) and (max-width: 480px) {
-  
-	/* CSS */
 	body {
-		background-image: url('https://prod-cdn.wetransfer.net/packs/media/images/home-illustration-6ea2e70b.jpg');
-		background-repeat: no-repeat;
-		background-size: cover;
-		left: 0;
-		position: absolute;
-		right: 0;
-		top: 0;
+		@include body-background;
+		@include mobile-hero-img;
+		background-position: center;
 	}
 
 	.navbar {
-		background-color: transparent !important;
+		@include navbar;
 	}
 }

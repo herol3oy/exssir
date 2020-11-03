@@ -9,7 +9,6 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import Button from 'react-bootstrap/Button'
 import FormControl from 'react-bootstrap/FormControl'
 import Col from 'react-bootstrap/Col'
-import Alert from 'react-bootstrap/Alert'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Tooltip from 'react-bootstrap/Tooltip'
 import Badge from 'react-bootstrap/Badge'
@@ -42,13 +41,16 @@ export default function CreateUrlForm () {
   const shortenUrlResults = urlsArr
     ?.slice(0, 3)
     .map((url) => (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
+      <div
+
         key={nanoid(3)}
       >
-        <Alert variant='success' className='d-flex align-items-center'>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className='alert alert-success d-flex align-items-center'
+        >
           <small className='mr-auto text-dark'>
             {`${url.longURL.slice(0, 20)}..`}
           </small>
@@ -67,18 +69,20 @@ export default function CreateUrlForm () {
               </Button>
             </CopyToClipboard>
           </OverlayTrigger>
-        </Alert>
-      </motion.div>
+        </motion.div>
+      </div>
     ))
 
   return (
-    <Col lg={4} sm={12}>
+    <Col lg={6} sm={12}>
       <section className='mb-3'>
         <h1 className='site-title display-4 text-success text-center'>اکسیر</h1>
-        <h6 className='text-center text-secondary'>
+        <h6 dir='rtl' className='text-center text-secondary'>
           کوتاه‌کننده لینک
-          <FaLink className='mx-1 text-success' />
+          {/* <FaLink className='mx-1 text-success' /> */}
+          <span role='img' aria-label='لینک'>🔗</span> {` `}
            گالری‌ آنلاین هنری
+          <span role='img' aria-label='نقاش'>🎨</span>
         </h6>
       </section>
       <Form className='shadow-lg' onSubmit={createUrl}>
@@ -100,11 +104,12 @@ export default function CreateUrlForm () {
       </Form>
       {!urlCreated ? (
         <div className='d-flex flex-wrap align-content-between justify-content-center'>
-          <Badge variant='secondary mr-1'>نامحدود</Badge>
           <Badge variant='secondary mr-1'>همیشه پایدار</Badge>
           <Badge variant='secondary mr-1'>پرسرعت</Badge>
           <Badge variant='secondary mr-1'>بدون نیاز به ثبت‌نام</Badge>
-          <Badge variant='success mt-0 mt-lg-1 mt-md-1 mt-sm-1 mr-1'>میزبانی برروی سرورهای گوگل‌کلود</Badge>
+          <Badge variant='secondary mr-1'>لینک‌ دایمی</Badge>
+          <Badge variant='secondary mr-1'>نامحدود</Badge>
+          <Badge variant='success '>میزبانی توسط گوگل‌کلود</Badge>
         </div>
       ) : null}
       {urlCreated ? shortenUrlResults : null}

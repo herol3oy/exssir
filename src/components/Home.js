@@ -2,7 +2,7 @@ import Nav from './Nav'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import CreateUrlForm from './CreateUrlForm'
-import Gallery from './Gallery'
+// import Gallery from './Gallery'
 
 export default function Home () {
   return (
@@ -19,16 +19,16 @@ export default function Home () {
         align-items-sm-center
         '
         >
-          <div className='
+          {/* <div className='
           d-flex
           flex-lg-row
           flex-column
           align-items-center
           '
-          >
-            <Gallery />
-            <CreateUrlForm />
-          </div>
+          > */}
+          {/* <Gallery /> */}
+          <CreateUrlForm />
+          {/* </div> */}
         </Row>
       </Container>
     </>
