@@ -2,15 +2,15 @@ import styled, { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
 
-  @import url('https://fonts.googleapis.com/css2?family=Lalezar&display=swap');
+	@import url('https://fonts.googleapis.com/css2?family=Lalezar&display=swap');
 
-  html {
-    height: 100%;
-  }
-  
-  body {
-    font-family: 'Vazir', sans-serif !important;
-  }
+	html {
+		height: 100%;
+	}
+
+	body {
+		font-family: 'Vazir', sans-serif !important;
+	}
 
   /* ##Device = Desktops ##Screen = 1281px to higher resolution desktops */
  @media (min-width: 1281px) {
@@ -66,8 +66,8 @@ export const GlobalStyle = createGlobalStyle`
  @media (min-width: 481px) and (max-width: 767px) {
 	/* CSS */
 	 body {
-		 background-image: url('https://source.unsplash.com/1600x900/?art,design,minimal');
-		 background-position: top;
+		 /* background-image: url('https://source.unsplash.com/1600x900/?art,design,minimal'); */
+		 /* background-position: top; */
 		 background-repeat: no-repeat;
 		 background-size: cover;
 		 left: 0;
@@ -84,8 +84,8 @@ export const GlobalStyle = createGlobalStyle`
 /* ##Device = Most of the Smartphones Mobiles (Portrait) ##Screen = B/w 320px to 479px */
  @media (min-width: 320px) and (max-width: 480px) {
 	 body {
-		 background-image: url('https://source.unsplash.com/1600x900/?art,design,minimal');
-		 background-position: top;
+		 /* background-image: url('https://source.unsplash.com/1600x900/?art,design,minimal'); */
+		 /* background-position: top; */
 		 background-repeat: no-repeat;
 		 background-size: cover;
 		 left: 0;

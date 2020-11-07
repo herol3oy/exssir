@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { nanoid } from 'nanoid'
 import { db, serverTimestamp } from '../containers/Firebase'
@@ -14,7 +14,7 @@ import Badge from 'react-bootstrap/Badge'
 import Recaptcha from 'react-google-invisible-recaptcha'
 import { FontStyle } from '../styles/GlobalStyle'
 
-export default function CreateUrlForm() {
+export default function CreateUrlForm () {
   const [longURL, setLongURL] = useState('')
   const [urlCreated, setUrlCreated] = useState(false)
   const [urlsArr, setUrlArr] = useState([])

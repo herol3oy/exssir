@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { LogoBG } from '../styles/GlobalStyle'
 import Navbar from 'react-bootstrap/Navbar'
@@ -8,7 +8,7 @@ import AboutModal from './AboutModal'
 import Contact from './ContactModal'
 import 'csshake/dist/csshake.min.css'
 
-export default function Nav() {
+export default function Nav () {
   const [aboutModalShow, setAboutModalShow] = useState(false)
   const [contactModalShow, setContactModalShow] = useState(false)
 

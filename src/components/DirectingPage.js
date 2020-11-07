@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { db, increment } from '../containers/Firebase'
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet'
 
-export default function DirectingPage({ match }) {
+export default function DirectingPage ({ match }) {
   const name = match.params.name
 
   useEffect(() => {

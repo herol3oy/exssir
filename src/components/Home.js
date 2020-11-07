@@ -4,10 +4,10 @@ import Row from 'react-bootstrap/Row'
 import CreateUrlForm from './CreateUrlForm'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import GlobalStyle from '../styles/GlobalStyle'
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet'
 // import Gallery from './Gallery'
 
-export default function Home() {
+export default function Home () {
   return (
     <>
       <GlobalStyle />
