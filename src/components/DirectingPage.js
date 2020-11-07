@@ -1,7 +1,8 @@
 import { useEffect } from 'react'
 import { db, increment } from '../containers/Firebase'
+import { Helmet } from "react-helmet";
 
-export default function DirectingPage ({ match }) {
+export default function DirectingPage({ match }) {
   const name = match.params.name
 
   useEffect(() => {
@@ -20,5 +21,5 @@ export default function DirectingPage ({ match }) {
       .catch(error => console.log('Error getting documents: ', error))
   })
 
-  return null
+  return (<Helmet><title>‌</title></Helmet>)
 }
