@@ -12,8 +12,9 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Tooltip from 'react-bootstrap/Tooltip'
 import Badge from 'react-bootstrap/Badge'
 import Recaptcha from 'react-google-invisible-recaptcha'
+import { FontStyle } from '../styles/GlobalStyle'
 
-export default function CreateUrlForm () {
+export default function CreateUrlForm() {
   const [longURL, setLongURL] = useState('')
   const [urlCreated, setUrlCreated] = useState(false)
   const [urlsArr, setUrlArr] = useState([])
@@ -82,7 +83,9 @@ export default function CreateUrlForm () {
   return (
     <Col lg={6} sm={12}>
       <section className='mb-3'>
-        <h1 className='site-title display-4 text-success text-center'>اکسیر</h1>
+        <FontStyle className='display-4 text-success text-center'>
+          اکسیر
+        </FontStyle>
         <h6 dir='rtl' className='text-center text-secondary'>
           کوتاه‌کننده لینک
           <span role='img' aria-label='لینک'>🔗</span> {' '}

@@ -2,11 +2,14 @@ import Nav from './Nav'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import CreateUrlForm from './CreateUrlForm'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import GlobalStyle from '../styles/GlobalStyle'
 // import Gallery from './Gallery'
 
-export default function Home () {
+export default function Home() {
   return (
     <>
+    <GlobalStyle />
       <Nav />
       <Container>
         <Row className='
@@ -31,6 +34,6 @@ export default function Home () {
           {/* </div> */}
         </Row>
       </Container>
-    </>
+      </>
   )
 }

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom'
+import { LogoBG } from '../styles/GlobalStyle'
 import Navbar from 'react-bootstrap/Navbar'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Button from 'react-bootstrap/Button'
@@ -7,7 +8,7 @@ import AboutModal from './AboutModal'
 import Contact from './ContactModal'
 import 'csshake/dist/csshake.min.css'
 
-export default function Nav () {
+export default function Nav() {
   const [aboutModalShow, setAboutModalShow] = useState(false)
   const [contactModalShow, setContactModalShow] = useState(false)
 
@@ -21,9 +22,11 @@ export default function Nav () {
         <Navbar.Toggle />
         <Navbar.Collapse className='justify-content-end'>
           <Navbar.Brand>
-            <Link to='/' className='logo-circle shake shake-opacity display-4 rounded-circle text-decoration-none'>
-              <span role='img' aria-label='اکسیر'>🧪</span>
-            </Link>
+            <LogoBG>
+              <Link to='/' className='shake shake-opacity display-4 rounded-circle text-decoration-none'>
+                <span role='img' aria-label='اکسیر'>🧪</span>
+              </Link>
+            </LogoBG>
           </Navbar.Brand>
         </Navbar.Collapse>
       </Navbar>
