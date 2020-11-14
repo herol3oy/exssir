@@ -104,7 +104,7 @@ export default function CreateUrlForm () {
             onChange={(e) => setLongURL(e.target.value)}
           />
           <InputGroup.Append>
-            <Button variant='success' type='submit' className='font-weight-bold'>
+            <Button variant='success' type='submit' className='font-weight-bold btn-lg'>
               کوتاه‌کن
             </Button>
           </InputGroup.Append>
@@ -118,12 +118,12 @@ export default function CreateUrlForm () {
       />
       {!urlCreated ? (
         <div className='d-flex flex-wrap justify-content-center'>
-          <Badge variant='secondary mr-1'>همیشه پایدار</Badge>
-          <Badge variant='secondary mr-1'>پرسرعت</Badge>
-          <Badge variant='secondary mr-1'>بدون نیاز به ثبت‌نام</Badge>
-          <Badge variant='secondary mr-1'>لینک‌ دایمی</Badge>
-          <Badge variant='secondary mr-1'>نامحدود</Badge>
-          <Badge variant='success mt-1 mt-xl-0 mt-lg-0 mt-md-0 mt-sm-0'>میزبانی توسط گوگل‌کلود</Badge>
+          <Badge className='badge rounded-pill bg-secondary' variant='secondary mr-1'>همیشه پایدار</Badge>
+          <Badge className='badge rounded-pill bg-secondary' variant='secondary mr-1'>پرسرعت</Badge>
+          <Badge className='badge rounded-pill bg-secondary' variant='secondary mr-1'>بدون نیاز به ثبت‌نام</Badge>
+          <Badge className='badge rounded-pill bg-secondary' variant='secondary mr-1'>لینک‌ دایمی</Badge>
+          <Badge className='badge rounded-pill bg-secondary' variant='secondary mr-1'>نامحدود</Badge>
+          <Badge className='badge rounded-pill bg-success' variant='success mt-1 mt-xl-0 mt-lg-0 mt-md-0 mt-sm-0'>میزبانی توسط گوگل‌کلود</Badge>
         </div>
       ) : null}
       {urlCreated ? shortenUrlResults : null}

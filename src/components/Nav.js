@@ -14,10 +14,10 @@ export default function Nav () {
 
   return (
     <>
-      <Navbar className='shadow-sm' bg='light'>
+      <Navbar className='shadow-sm px-2' bg='light'>
         <ButtonGroup size='sm'>
           <Button variant='outline-success' onClick={() => setContactModalShow(true)}>تماس</Button>
-          <Button variant='outline-success' onClick={() => setAboutModalShow(true)}>درباره اکسیر</Button>
+          <Button variant='outline-success' onClick={() => setAboutModalShow(true)}>درباره</Button>
         </ButtonGroup>
         <Navbar.Toggle />
         <Navbar.Collapse className='justify-content-end'>
