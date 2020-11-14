@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { nanoid } from 'nanoid'
-import { db, serverTimestamp } from '../containers/Firebase'
+import { db, serverTimestamp } from '../firebase/config'
 import { FaRegCopy, FaCheck } from 'react-icons/fa'
 import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'

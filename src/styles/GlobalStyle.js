@@ -3,7 +3,8 @@ import styled, { createGlobalStyle } from 'styled-components'
 export const GlobalStyle = createGlobalStyle`
 
 	@import url('https://fonts.googleapis.com/css2?family=Lalezar&display=swap');
-
+	@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v26.0.2/dist/font-face.css');
+	
 	html {
 		height: 100%;
 	}

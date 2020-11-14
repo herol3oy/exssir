@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { db, increment } from '../containers/Firebase'
+import { db, increment } from '../firebase/config'
 import { Helmet } from 'react-helmet'
 
 export default function DirectingPage ({ match }) {
