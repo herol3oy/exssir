@@ -13,6 +13,17 @@ export const GlobalStyle = createGlobalStyle`
 		font-family: 'Vazir', sans-serif !important;
 	}
 
+	nav {
+		right:0;
+		left:0;
+	}
+
+	.input-group-text {
+		border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+
+	}
+
   /* ##Device = Desktops ##Screen = 1281px to higher resolution desktops */
  @media (min-width: 1281px) {
 	 body {

@@ -23,9 +23,7 @@ export default function Home () {
         d-flex
         justify-content-start
         justify-content-sm-center
-        align-items-start
-        align-items-lg-center
-        align-items-sm-center
+        align-items-center
         '
         >
           {/* <div className='

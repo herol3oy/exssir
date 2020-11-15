@@ -7,18 +7,19 @@ export default function DirectingPage ({ match }) {
 
   useEffect(() => {
     const ref = db.collection('urls')
-
     ref
       .where('shortId', '==', name)
       .get()
-      .then(querySnapshot => {
+      .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           const urlRef = db.collection('urls').doc(doc.id)
           urlRef.update({ visits: increment })
           window.location = doc.data().longURL
         })
       })
-      .catch(error => console.log('Error getting documents: ', error))
+      .catch((error) => {
+        console.log('Error getting documents: ', error)
+      })
   })
 
   return (<Helmet><title>‌</title></Helmet>)

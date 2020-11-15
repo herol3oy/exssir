@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { nanoid } from 'nanoid'
 import { db, serverTimestamp } from '../firebase/config'
@@ -19,8 +19,11 @@ export default function CreateUrlForm () {
   const [urlCreated, setUrlCreated] = useState(false)
   const [urlsArr, setUrlArr] = useState([])
   const [copied, setCopied] = useState(false)
-
+  const [customURL, setCustomURL] = useState('')
+  const [customUrlAvailable, setCustomUrlAvailable] = useState(false)
   const recaptcha = useRef()
+  const ref = db.collection('urls')
+
   const onResolved = () => {
     const data = {
       reCaptchaToken: recaptcha.current.getResponse()
@@ -29,12 +32,19 @@ export default function CreateUrlForm () {
     console.log('data', data)
   }
 
-  const ref = db.collection('urls')
+  useEffect(() => {
+    db
+      .collection('urls')
+      .where('shortId', '==', customURL)
+      .onSnapshot((querySnapshot) => {
+        setCustomUrlAvailable(!!querySnapshot.docs.length)
+      })
+  }, [customURL])
 
   const createUrl = (e) => {
-    recaptcha.current.execute()
     e.preventDefault()
-    if (longURL !== '') {
+    recaptcha.current.execute()
+    if (longURL !== '' && customURL === '') {
       const shortId = nanoid(5)
       ref
         .doc()
@@ -45,9 +55,20 @@ export default function CreateUrlForm () {
           visits: 0
         })
       setUrlArr((prevState) => [{ longURL, shortId }, ...prevState])
-      setUrlCreated(true)
-      setLongURL('')
+    } else {
+      ref
+        .doc()
+        .set({
+          longURL,
+          shortId: customURL,
+          createdAt: serverTimestamp(),
+          visits: 0
+        })
+      setUrlArr((prevState) => [{ longURL, shortId: customURL }, ...prevState])
     }
+    setUrlCreated(true)
+    setCustomURL('')
+    setLongURL('')
   }
 
   const copyHandleClick = () => {
@@ -57,8 +78,8 @@ export default function CreateUrlForm () {
 
   const shortenUrlResults = urlsArr
     ?.slice(0, 3)
-    .map((url) => (
-      <div key={nanoid(3)} className='alert alert-success d-flex align-items-center'>
+    .map((url, i) => (
+      <div key={i} className='alert alert-success d-flex align-items-center'>
         <small className='mr-auto text-dark'>
           {`${url.longURL.slice(0, 20)}..`}
         </small>
@@ -93,9 +114,10 @@ export default function CreateUrlForm () {
           <span role='img' aria-label='نقاش'>🎨</span>
         </h6>
       </section>
-      <Form className='shadow-lg' onSubmit={createUrl}>
-        <InputGroup size='lg' className='mb-3'>
+      <Form className=' my-2' onSubmit={createUrl}>
+        <InputGroup size='lg'>
           <FormControl
+            required
             placeholder='لینک خود را وارد کنید'
             aria-label='لینک خود را وارد کنید'
             aria-describedby='لینک'
@@ -103,11 +125,26 @@ export default function CreateUrlForm () {
             value={longURL}
             onChange={(e) => setLongURL(e.target.value)}
           />
-          <InputGroup.Append>
-            <Button variant='success' type='submit' className='font-weight-bold btn-lg'>
-              کوتاه‌کن
-            </Button>
-          </InputGroup.Append>
+        </InputGroup>
+
+        <InputGroup size='lg' className='my-1'>
+          <InputGroup.Prepend>
+            <InputGroup.Text className='h-100'>
+              https://exss.ir/
+            </InputGroup.Text>
+          </InputGroup.Prepend>
+          <FormControl
+            value={customURL}
+            onChange={(e) => setCustomURL(e.target.value)}
+            placeholder='آدرس دلخواه'
+            aria-label='آدرس دلخواه'
+            aria-describedby='آدرس دلخواه'
+          />
+        </InputGroup>
+        <InputGroup>
+          <Button disabled={customUrlAvailable} variant='success' type='submit' className='font-weight-bold btn-lg w-100'>
+            کوتاه‌کن
+          </Button>
         </InputGroup>
       </Form>
       <Recaptcha
