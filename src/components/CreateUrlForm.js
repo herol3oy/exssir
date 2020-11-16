@@ -16,7 +16,7 @@ import Badge from 'react-bootstrap/Badge'
 import Recaptcha from 'react-google-invisible-recaptcha'
 import { FontStyle } from '../styles/GlobalStyle'
 
-export default function CreateUrlForm() {
+export default function CreateUrlForm () {
   const [longURL, setLongURL] = useState('')
   const [customURL, setCustomURL] = useState('')
   const [errorMsg, setErrorMsg] = useState('')
@@ -172,7 +172,7 @@ export default function CreateUrlForm() {
         ref={recaptcha}
         sitekey='6Ldrod4ZAAAAAI-DLI85XIkAbvuHHiZ0hSqy6jTo'
         render='explicit'
-        onResolved={recaptcha.current.reset()}
+        onResolved={() => recaptcha.current.reset()}
       />
       {!urlCreated ? (
         <div className='d-flex flex-wrap justify-content-center'>
@@ -185,7 +185,6 @@ export default function CreateUrlForm() {
         </div>
       ) : null}
       {urlCreated ? shortenUrlResults : null}
-      {/* {errorMsg ? errorMsg : null} */}
     </Col>
   )
 }
