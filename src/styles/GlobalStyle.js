@@ -4,6 +4,7 @@ export const GlobalStyle = createGlobalStyle`
 
 	@import url('https://fonts.googleapis.com/css2?family=Lalezar&display=swap');
 	@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v26.0.2/dist/font-face.css');
+	@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/css/bootstrap.min.css');
 	
 	html {
 		height: 100%;
@@ -21,7 +22,6 @@ export const GlobalStyle = createGlobalStyle`
 	.input-group-text {
 		border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-
 	}
 
   /* ##Device = Desktops ##Screen = 1281px to higher resolution desktops */

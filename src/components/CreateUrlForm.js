@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { nanoid } from 'nanoid'
+// import validator from 'validator'
 import { db, serverTimestamp } from '../firebase/config'
 import { FaRegCopy, FaCheck } from 'react-icons/fa'
 import Form from 'react-bootstrap/Form'
@@ -14,7 +15,7 @@ import Badge from 'react-bootstrap/Badge'
 import Recaptcha from 'react-google-invisible-recaptcha'
 import { FontStyle } from '../styles/GlobalStyle'
 
-export default function CreateUrlForm () {
+export default function CreateUrlForm() {
   const [longURL, setLongURL] = useState('')
   const [urlCreated, setUrlCreated] = useState(false)
   const [urlsArr, setUrlArr] = useState([])
@@ -22,6 +23,7 @@ export default function CreateUrlForm () {
   const [customURL, setCustomURL] = useState('')
   const [customUrlAvailable, setCustomUrlAvailable] = useState(false)
   const recaptcha = useRef()
+  const longUrlInput = useRef(null)
   const ref = db.collection('urls')
 
   const onResolved = () => {
@@ -31,50 +33,45 @@ export default function CreateUrlForm () {
     recaptcha.current.reset()
     console.log('data', data)
   }
+  const customUrlRef = db.collection('urls').where('shortId', '==', customURL)
+
 
   useEffect(() => {
-    db
-      .collection('urls')
-      .where('shortId', '==', customURL)
-      .onSnapshot((querySnapshot) => {
-        setCustomUrlAvailable(!!querySnapshot.docs.length)
-      })
-  }, [customURL])
+    customUrlRef.onSnapshot((querySnapshot) => {
+      const costumUrlExist = querySnapshot.docs.length
+      setCustomUrlAvailable(costumUrlExist ? true : false)
+    })
+  }, [customUrlRef])
 
   const createUrl = (e) => {
     e.preventDefault()
     recaptcha.current.execute()
-    if (longURL !== '' && customURL === '') {
-      const shortId = nanoid(5)
-      ref
-        .doc()
-        .set({
-          longURL,
-          shortId,
-          createdAt: serverTimestamp(),
-          visits: 0
-        })
-      setUrlArr((prevState) => [{ longURL, shortId }, ...prevState])
-    } else {
-      ref
-        .doc()
-        .set({
-          longURL,
-          shortId: customURL,
-          createdAt: serverTimestamp(),
-          visits: 0
-        })
-      setUrlArr((prevState) => [{ longURL, shortId: customURL }, ...prevState])
-    }
+    const shortId = nanoid(5)
+    ref
+      .doc()
+      .set({
+        longURL,
+        shortId: customURL ? customURL : shortId,
+        createdAt: serverTimestamp(),
+        visits: 0
+      })
+    setUrlArr((prevState) => [{ longURL, shortId: customURL ? customURL : shortId }, ...prevState])
     setUrlCreated(true)
     setCustomURL('')
     setLongURL('')
+    longUrlInput.current.focus()
   }
 
   const copyHandleClick = () => {
     setCopied(true)
     setTimeout(() => setCopied(false), 900)
   }
+
+  const validateCustomUrl = (e) => {
+    setCustomURL(e.target.value)
+    // const customUrlValidation = validator.isLength(customURL, { min: 4 })&& validator.isAlphanumeric(customURL)
+  }
+
 
   const shortenUrlResults = urlsArr
     ?.slice(0, 3)
@@ -104,7 +101,7 @@ export default function CreateUrlForm () {
   return (
     <Col lg={6} sm={12}>
       <section className='mb-3'>
-        <FontStyle className='display-4 text-success text-center'>
+        <FontStyle className='display-1 text-success text-center'>
           اکسیر
         </FontStyle>
         <h6 dir='rtl' className='text-center text-secondary'>
@@ -117,6 +114,7 @@ export default function CreateUrlForm () {
       <Form className=' my-2' onSubmit={createUrl}>
         <InputGroup size='lg'>
           <FormControl
+            ref={longUrlInput}
             required
             placeholder='لینک خود را وارد کنید'
             aria-label='لینک خود را وارد کنید'
@@ -135,14 +133,14 @@ export default function CreateUrlForm () {
           </InputGroup.Prepend>
           <FormControl
             value={customURL}
-            onChange={(e) => setCustomURL(e.target.value)}
+            onChange={validateCustomUrl}
             placeholder='آدرس دلخواه'
             aria-label='آدرس دلخواه'
             aria-describedby='آدرس دلخواه'
           />
         </InputGroup>
         <InputGroup>
-          <Button disabled={customUrlAvailable} variant='success' type='submit' className='font-weight-bold btn-lg w-100'>
+          <Button disabled={customUrlAvailable} variant='success' type='submit' className='bg-gradient font-weight-bold btn-lg w-100'>
             کوتاه‌کن
           </Button>
         </InputGroup>
