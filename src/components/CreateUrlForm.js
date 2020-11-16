@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { nanoid } from 'nanoid'
-// import validator from 'validator'
+import isLength from 'validator/lib/isLength'
+import isAlphanumeric from 'validator/lib/isAlphanumeric'
 import { db, serverTimestamp } from '../firebase/config'
 import { FaRegCopy, FaCheck } from 'react-icons/fa'
 import Form from 'react-bootstrap/Form'
@@ -17,49 +18,32 @@ import { FontStyle } from '../styles/GlobalStyle'
 
 export default function CreateUrlForm() {
   const [longURL, setLongURL] = useState('')
-  const [urlCreated, setUrlCreated] = useState(false)
-  const [urlsArr, setUrlArr] = useState([])
-  const [copied, setCopied] = useState(false)
   const [customURL, setCustomURL] = useState('')
-  const [customUrlAvailable, setCustomUrlAvailable] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
+  const [urlCreated, setUrlCreated] = useState(false)
+  const [copied, setCopied] = useState(false)
+  const [customUrlExist, setCustomUrlExist] = useState(false)
+  const [isValid, setIsValid] = useState(false)
+  const [urlsArr, setUrlArr] = useState([])
+
   const recaptcha = useRef()
   const longUrlInput = useRef(null)
+
   const ref = db.collection('urls')
 
-  const onResolved = () => {
-    const data = {
-      reCaptchaToken: recaptcha.current.getResponse()
-    }
-    recaptcha.current.reset()
-    console.log('data', data)
-  }
-  const customUrlRef = db.collection('urls').where('shortId', '==', customURL)
-
-
   useEffect(() => {
-    customUrlRef.onSnapshot((querySnapshot) => {
-      const costumUrlExist = querySnapshot.docs.length
-      setCustomUrlAvailable(costumUrlExist ? true : false)
-    })
-  }, [customUrlRef])
-
-  const createUrl = (e) => {
-    e.preventDefault()
-    recaptcha.current.execute()
-    const shortId = nanoid(5)
     ref
-      .doc()
-      .set({
-        longURL,
-        shortId: customURL ? customURL : shortId,
-        createdAt: serverTimestamp(),
-        visits: 0
+      .where('shortId', '==', customURL)
+      .onSnapshot((querySnapshot) => {
+        setCustomUrlExist(querySnapshot.docs.length ? true : false)
       })
-    setUrlArr((prevState) => [{ longURL, shortId: customURL ? customURL : shortId }, ...prevState])
-    setUrlCreated(true)
-    setCustomURL('')
-    setLongURL('')
-    longUrlInput.current.focus()
+  }, [ref, customURL])
+
+  const customUrlHandle = (e) => {
+    const value = e.target.value
+    setCustomURL(value)
+    const customUrlValidation = isLength(value, { min: 5 }) && isAlphanumeric(value)
+    setIsValid(customUrlValidation ? true : false)
   }
 
   const copyHandleClick = () => {
@@ -67,11 +51,37 @@ export default function CreateUrlForm() {
     setTimeout(() => setCopied(false), 900)
   }
 
-  const validateCustomUrl = (e) => {
-    setCustomURL(e.target.value)
-    // const customUrlValidation = validator.isLength(customURL, { min: 4 })&& validator.isAlphanumeric(customURL)
+  const createUrl = (e) => {
+    e.preventDefault()
+    recaptcha.current.execute()
+    if (customUrlExist) {
+      setErrorMsg('این عبارت قبلا ثبت شده است')
+      setTimeout(() => setErrorMsg(''), 1500)
+    }
+    else if (customURL && !isValid) {
+      setErrorMsg('این عبارت معتبر نیست')
+      setTimeout(() => setErrorMsg(''), 1500)
+    }
+    else {
+      const shortId = nanoid(5)
+      ref
+        .doc()
+        .set({
+          longURL,
+          shortId: customURL ? customURL : shortId,
+          createdAt: serverTimestamp(),
+          visits: 0
+        })
+      setUrlArr((prevState) => [
+        { longURL, shortId: customURL ? customURL : shortId },
+        ...prevState])
+      setUrlCreated(true)
+      setCustomURL('')
+      setLongURL('')
+      setErrorMsg('')
+      longUrlInput.current.focus()
+    }
   }
-
 
   const shortenUrlResults = urlsArr
     ?.slice(0, 3)
@@ -133,23 +143,36 @@ export default function CreateUrlForm() {
           </InputGroup.Prepend>
           <FormControl
             value={customURL}
-            onChange={validateCustomUrl}
+            onChange={customUrlHandle}
             placeholder='آدرس دلخواه'
             aria-label='آدرس دلخواه'
             aria-describedby='آدرس دلخواه'
           />
         </InputGroup>
         <InputGroup>
-          <Button disabled={customUrlAvailable} variant='success' type='submit' className='bg-gradient font-weight-bold btn-lg w-100'>
-            کوتاه‌کن
+          {
+            errorMsg
+              ? <Button
+                disabled
+                variant='danger'
+                type='submit'
+                className='bg-gradient font-weight-bold btn-lg w-100'>
+                {errorMsg}
+              </Button>
+              : <Button
+                variant='success'
+                type='submit'
+                className='bg-gradient font-weight-bold btn-lg w-100'>
+                کوتاه‌کن
           </Button>
+          }
         </InputGroup>
       </Form>
       <Recaptcha
         ref={recaptcha}
         sitekey='6Ldrod4ZAAAAAI-DLI85XIkAbvuHHiZ0hSqy6jTo'
         render='explicit'
-        onResolved={onResolved}
+        onResolved={recaptcha.current.reset()}
       />
       {!urlCreated ? (
         <div className='d-flex flex-wrap justify-content-center'>
@@ -162,6 +185,7 @@ export default function CreateUrlForm() {
         </div>
       ) : null}
       {urlCreated ? shortenUrlResults : null}
+      {/* {errorMsg ? errorMsg : null} */}
     </Col>
   )
 }
